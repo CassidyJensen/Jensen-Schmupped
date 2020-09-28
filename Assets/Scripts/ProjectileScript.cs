@@ -6,7 +6,9 @@ public class ProjectileScript : MonoBehaviour
 {
     public float               speed = 2f;
     public int direction;
-    
+
+    public GameObject explosion;
+
     private Rigidbody2D        rb;
     
     // Start is called before the first frame update
@@ -42,8 +44,9 @@ public class ProjectileScript : MonoBehaviour
         if(other.gameObject.tag == "Enemy")
         {
             //award points
+            Instantiate(explosion, other.transform.position, Quaternion.identity);
             Destroy(other.gameObject);
-            Destroy(this.gameObject);
+            rb.AddForce(transform.up * speed * direction);
         }
 
         if(other.gameObject.tag == "wall")

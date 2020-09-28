@@ -12,7 +12,10 @@ public class PlayerScript : MonoBehaviour {
     public Image healthBar;
 
     public GameObject projectile;
-    public KeyCode fireKey;
+    public GameObject projectileDown;
+    public KeyCode fireUpKey, fireDownKey;
+
+    public int ammo;
 
     // Start is called before the first frame update
     void Start() {
@@ -34,9 +37,19 @@ public class PlayerScript : MonoBehaviour {
             }
         }
 
-        if (Input.GetKeyDown(fireKey))
+        if(ammo > 0)
         {
-            Instantiate(projectile, new Vector2(transform.position.x, transform.position.y + 0.5f), Quaternion.identity);
+            if (Input.GetKeyDown(fireUpKey))
+            {
+                Instantiate(projectile, new Vector2(transform.position.x, transform.position.y + 0.5f), Quaternion.identity);
+                ammo--;
+            }
+
+            if (Input.GetKeyDown(fireDownKey))
+            {
+                Instantiate(projectileDown, new Vector2(transform.position.x, transform.position.y - 0.5f), Quaternion.identity);
+                ammo--;
+            }
         }
 
         transform.localPosition = new Vector3(xPos, transform.position.y, 0);

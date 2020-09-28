@@ -12,7 +12,7 @@ Some initial ideas I had about this project include the following basic concepts
 
     5. Schmup with a rescue beam. There are hostages that need to be saved - but it takes time to beam them in.
 
-# 09.28.20 - Idea Refinement - Schmup’s Ahoy (#3)
+# 09.25.20 - Idea Refinement - Schmup’s Ahoy (#3)
 1. Which of Fullerton's Formal Elements are you working with?
 - Rules (Two sided weapons)
 - Resources (Time or Cannonballs) 
@@ -42,3 +42,13 @@ Some initial ideas I had about this project include the following basic concepts
 - The kraken takes a set amount of cannonballs to defeat it. The players must dodge attacks in order to survive. Resupply may occur by hitting a difficult target during the fight? 
 - After defeating the kraken, the rounds get harder by adding barriers (islands) and stronger / special enemy types. This cycle repeats. 
 - If there are power-ups/power-downs they are either from special enemies hitting the player or from shooting the item in the water. 
+
+# 09.28.20 - Schmup's Ahoy Day 1
+
+First day of development on the game was focused on getting a couple of the basics set up.
+
+- The player was moved to the center of the screen
+- Player can now shoot upwards or downwards using the up and down arrow keys
+- Projectiles are no longer destroyed upon hitting an enemy, they keep going through until they hit a wall
+- Enemies are now spawned on the bottom as well, with the ability to shoot upwards
+- Began development on a new enemy spawner program that randomly spawns the ships above and below after some amount of time [in progress]
