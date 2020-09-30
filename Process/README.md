@@ -52,3 +52,29 @@ First day of development on the game was focused on getting a couple of the basi
 - Projectiles are no longer destroyed upon hitting an enemy, they keep going through until they hit a wall
 - Enemies are now spawned on the bottom as well, with the ability to shoot upwards
 - Began development on a new enemy spawner program that randomly spawns the ships above and below after some amount of time [in progress]
+
+# 09.30.20 - Schmup's Ahoy Day 2
+
+- Have the kraken appear as  random variant, with different difficulties
+- Color changes
+    - The background is now blue
+    - The player is now red
+- Removed old enemy spawning code
+- Enemies are now spawned randomly above and below
+    - For the most part they don't overlap, but sometimes they do - BUG to fix later
+- Player now shoots 3 cannonballs from each side at a time
+    - Second two cannonballs shoot at an angle
+- Game Manager Script Added
+    - Controls ammo supplies and score
+    - Updates the text UI
+- Text UI added for the score and ammo
+- Enemies and player shift up and down on a sin wave, as though shifting on the waves
+    - This may be adjusted for the player later as a part of the rum power up 
+- Enemies projectiles are round again to be like cannonballs, but still green
+
+Next steps
+- Increase the frequency of enemies / fire rate to make it more difficult
+- Add ammo resupply (power up)
+- Update the sprites / visual components
+- Add rum (power up / down)
+- Add a Game Over screen

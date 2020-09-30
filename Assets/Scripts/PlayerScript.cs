@@ -10,12 +10,13 @@ public class PlayerScript : MonoBehaviour {
     //maybe swithc to game manager? 
     public float health = 1f;
     public Image healthBar;
+    public float angle1, angle2, angle3;
+    public float speedFreq = 2f;
+    public float amplitude = .5f;
 
     public GameObject projectile;
     public GameObject projectileDown;
     public KeyCode fireUpKey, fireDownKey;
-
-    public int ammo;
 
     // Start is called before the first frame update
     void Start() {
@@ -37,22 +38,41 @@ public class PlayerScript : MonoBehaviour {
             }
         }
 
-        if(ammo > 0)
+        if(ManagerScript.S.ammoVal > 0)
         {
             if (Input.GetKeyDown(fireUpKey))
             {
-                Instantiate(projectile, new Vector2(transform.position.x, transform.position.y + 0.5f), Quaternion.identity);
-                ammo--;
+                //Instantiate(projectile, new Vector2(transform.position.x, transform.position.y + 0.5f), Quaternion.identity);
+                ManagerScript.S.UpdateAmmo();
+
+                var proj = (GameObject)Instantiate(projectile, new Vector2(transform.position.x - .25f, transform.position.y + 0.5f), Quaternion.identity);
+                proj.GetComponent<ProjectileScript>().ReceiveParameter(angle1);
+                var proj1 = (GameObject)Instantiate(projectile, new Vector2(transform.position.x, transform.position.y + 0.5f), Quaternion.identity);
+                proj1.GetComponent<ProjectileScript>().ReceiveParameter(angle2);
+                var proj2 = (GameObject)Instantiate(projectile, new Vector2(transform.position.x + .25f, transform.position.y + 0.5f), Quaternion.identity);
+                proj2.GetComponent<ProjectileScript>().ReceiveParameter(angle3);
             }
 
             if (Input.GetKeyDown(fireDownKey))
             {
-                Instantiate(projectileDown, new Vector2(transform.position.x, transform.position.y - 0.5f), Quaternion.identity);
-                ammo--;
+                //Instantiate(projectileDown, new Vector2(transform.position.x, transform.position.y - 0.5f), Quaternion.identity);
+                ManagerScript.S.UpdateAmmo();
+
+                var proj = (GameObject)Instantiate(projectileDown, new Vector2(transform.position.x - .25f, transform.position.y - 0.5f), Quaternion.identity);
+                proj.GetComponent<ProjectileScript>().ReceiveParameter(angle1);
+                var proj1 = (GameObject)Instantiate(projectileDown, new Vector2(transform.position.x, transform.position.y - 0.5f), Quaternion.identity);
+                proj1.GetComponent<ProjectileScript>().ReceiveParameter(angle2);
+                var proj2 = (GameObject)Instantiate(projectileDown, new Vector2(transform.position.x + .25f, transform.position.y - 0.5f), Quaternion.identity);
+                proj2.GetComponent<ProjectileScript>().ReceiveParameter(angle3);
+
+
             }
         }
 
-        transform.localPosition = new Vector3(xPos, transform.position.y, 0);
+        //move side to side - Sine waves
+        float offset = Mathf.Sin(Time.time * speedFreq) * amplitude / 2;
+
+        transform.localPosition = new Vector3(xPos, offset, 0);
     }
 
     void OnTriggerEnter2D(Collider2D other)

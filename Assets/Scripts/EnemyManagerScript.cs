@@ -16,7 +16,7 @@ public class EnemyManagerScript : MonoBehaviour {
     public float roundLength;
     public int spawnMax;
 
-    private int randX;
+    private float randX;
     private Vector2 loc2;
 
     private Vector2 enemySize = new Vector2(1f, .25f);
@@ -24,25 +24,25 @@ public class EnemyManagerScript : MonoBehaviour {
     // Start is called before the first frame update
     void Start()
     {
-        for (int i = 0; i < numRows; i++) {
-            for (int j = 0; j < numColumns; j++) {
-                Transform go = Instantiate(enemyAbove);
-                go.transform.parent = this.transform;
+       // for (int i = 0; i < numRows; i++) {
+         //   for (int j = 0; j < numColumns; j++) {
+           //     Transform go = Instantiate(enemyAbove);
+             //   go.transform.parent = this.transform;
                 
-                Vector2 loc = new Vector2(xOrigin + (i * xSpacing), yOrigin - (j * ySpacing));
+              //  Vector2 loc = new Vector2(xOrigin + (i * xSpacing), yOrigin - (j * ySpacing));
 
-                go.transform.position = loc;
+                //go.transform.position = loc;
 
                 //generate enemies on bottom at same space for testing
-                Transform below = Instantiate(enemyBelow);
-                below.transform.parent = this.transform;
-                Vector2 loc2 = new Vector2(xOrigin + (i * xSpacing), -yOrigin + (j * ySpacing));
-                below.transform.position = loc2;
+//                Transform below = Instantiate(enemyBelow);
+  //              below.transform.parent = this.transform;
+    //            Vector2 loc2 = new Vector2(xOrigin + (i * xSpacing), -yOrigin + (j * ySpacing));
+      //          below.transform.position = loc2;
 
-                SpriteRenderer sr = go.GetComponent<SpriteRenderer>();
-                SpriteRenderer sr2 = below.GetComponent<SpriteRenderer>();
-            }
-        }
+        //        SpriteRenderer sr = go.GetComponent<SpriteRenderer>();
+          //      SpriteRenderer sr2 = below.GetComponent<SpriteRenderer>();
+       //     }
+       // }
 
         StartCoroutine(EnemySpawner());
 
@@ -52,7 +52,7 @@ public class EnemyManagerScript : MonoBehaviour {
     {
         //move side to side - Sine waves
         float offset = Mathf.Sin(Time.time * speedFreq) * amplitude / 2;
-        transform.position = new Vector2(offset, transform.position.y);
+        transform.position = new Vector2(transform.position.x, offset + 4);
 
     }
 
@@ -64,6 +64,7 @@ public class EnemyManagerScript : MonoBehaviour {
         //random number 1-3
         //randomly split between top or bottom enemies
         //choose a location on the screen where enemies are not present. Animate up / down
+        //random row??
         for (int y = 0; y < roundLength; y++) {
             int r = Random.Range(0, spawnMax + 1);
            // Debug.Log("Section");
@@ -76,9 +77,10 @@ public class EnemyManagerScript : MonoBehaviour {
                 if (aOrB == 0)
                 {
                     //generate enemy above
+                    int row = Random.Range(1, 5);
                     Transform go = Instantiate(enemyAbove);
                     go.transform.parent = this.transform;
-                    Vector2 loc = new Vector2(r, aOrB);
+                    Vector2 loc = new Vector2(r, row);
                     go.transform.position = loc;
 
                     SpriteRenderer sr = go.GetComponent<SpriteRenderer>();
@@ -86,15 +88,15 @@ public class EnemyManagerScript : MonoBehaviour {
                 else
                 {
                     //generate enemy below
-
+                    int row = Random.Range(-4, 0);
                     Transform below = Instantiate(enemyBelow);
                     below.transform.parent = this.transform;
 
                     bool check = true;
                     while(check == true)
                     {
-                        randX = Random.Range(-5, 5);
-                        loc2 = new Vector2(randX, aOrB);
+                        randX = Random.Range(-5f, 5f);
+                        loc2 = new Vector2(randX, row);
                         check = isObjectHere(loc2);
                     }
 
