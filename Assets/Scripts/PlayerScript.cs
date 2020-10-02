@@ -7,9 +7,6 @@ public class PlayerScript : MonoBehaviour {
     private float     xPos;
     public float      speed = .05f;
     public float      leftWall, rightWall;
-    //maybe swithc to game manager? 
-    public float health = 1f;
-    public Image healthBar;
     public float angle1, angle2, angle3;
     public float speedFreq = 2f;
     public float amplitude = .5f;
@@ -20,7 +17,6 @@ public class PlayerScript : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-        healthBar.fillAmount = health;
 
     }
 
@@ -43,7 +39,7 @@ public class PlayerScript : MonoBehaviour {
             if (Input.GetKeyDown(fireUpKey))
             {
                 //Instantiate(projectile, new Vector2(transform.position.x, transform.position.y + 0.5f), Quaternion.identity);
-                ManagerScript.S.UpdateAmmo();
+                ManagerScript.S.UpdateAmmo(-1);
 
                 var proj = (GameObject)Instantiate(projectile, new Vector2(transform.position.x - .25f, transform.position.y + 0.5f), Quaternion.identity);
                 proj.GetComponent<ProjectileScript>().ReceiveParameter(angle1);
@@ -56,7 +52,7 @@ public class PlayerScript : MonoBehaviour {
             if (Input.GetKeyDown(fireDownKey))
             {
                 //Instantiate(projectileDown, new Vector2(transform.position.x, transform.position.y - 0.5f), Quaternion.identity);
-                ManagerScript.S.UpdateAmmo();
+                ManagerScript.S.UpdateAmmo(-1);
 
                 var proj = (GameObject)Instantiate(projectileDown, new Vector2(transform.position.x - .25f, transform.position.y - 0.5f), Quaternion.identity);
                 proj.GetComponent<ProjectileScript>().ReceiveParameter(angle1);
@@ -80,9 +76,16 @@ public class PlayerScript : MonoBehaviour {
         if (other.gameObject.tag == "EnemyProjectile")
         {
             Destroy(other.gameObject);
-            health -= .1f;
-            healthBar.fillAmount = health;
+            ManagerScript.S.UpdateHealth();
+        }
+
+        if (other.gameObject.tag == "AmmoSupply")
+        {
+            Destroy(other.gameObject);
+            ManagerScript.S.UpdateAmmo(10);
+
         }
     }
+
 }
 

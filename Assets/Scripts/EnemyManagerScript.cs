@@ -17,9 +17,9 @@ public class EnemyManagerScript : MonoBehaviour {
     public int spawnMax;
 
     private float randX;
-    private Vector2 loc2;
+    private Vector2 loc2, loc;
 
-    private Vector2 enemySize = new Vector2(1f, .25f);
+    private Vector2 enemySize = new Vector2(.5f, .3f);
 
     // Start is called before the first frame update
     void Start()
@@ -80,7 +80,15 @@ public class EnemyManagerScript : MonoBehaviour {
                     int row = Random.Range(1, 5);
                     Transform go = Instantiate(enemyAbove);
                     go.transform.parent = this.transform;
-                    Vector2 loc = new Vector2(r, row);
+
+                    bool check = true;
+                    while (check == true)
+                    {
+                        randX = Random.Range(-5f, 5f);
+                        loc = new Vector2(randX, row);
+                        check = isObjectHere(loc2);
+                    }
+
                     go.transform.position = loc;
 
                     SpriteRenderer sr = go.GetComponent<SpriteRenderer>();

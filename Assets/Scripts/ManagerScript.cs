@@ -1,12 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ManagerScript : MonoBehaviour
 {
     public Text score, ammo;
     public int scoreVal, ammoVal;
+
+    public float health = 1f;
+    public Image healthBar;
+
+    public GameObject ammoBox;
 
     public static ManagerScript S;
 
@@ -20,6 +26,12 @@ public class ManagerScript : MonoBehaviour
     {
         ammo.text = ammoVal.ToString();
         score.text = scoreVal.ToString();
+
+        healthBar.fillAmount = health;
+
+
+        Instantiate(ammoBox);
+
     }
 
     // Update is called once per frame
@@ -33,9 +45,20 @@ public class ManagerScript : MonoBehaviour
         scoreVal += 100;
          score.text = scoreVal.ToString();
     }
-    public void UpdateAmmo()
+    public void UpdateAmmo(int ammoNum)
     {
-        ammoVal--;
+        ammoVal = ammoVal + ammoNum;
         ammo.text = ammoVal.ToString();
+    }
+
+    public void UpdateHealth()
+    {
+        health -= .1f;
+        if (health <= 0)
+        {
+            //game over
+            SceneManager.LoadScene("GameOver");
+        }
+        healthBar.fillAmount = health;
     }
 }

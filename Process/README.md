@@ -43,7 +43,7 @@ Some initial ideas I had about this project include the following basic concepts
 - After defeating the kraken, the rounds get harder by adding barriers (islands) and stronger / special enemy types. This cycle repeats. 
 - If there are power-ups/power-downs they are either from special enemies hitting the player or from shooting the item in the water. 
 
-# 09.28.20 - Schmup's Ahoy Day 1
+# 09.28.20 - Schmup's Ahoy Dev Day 1
 
 First day of development on the game was focused on getting a couple of the basics set up.
 
@@ -53,7 +53,7 @@ First day of development on the game was focused on getting a couple of the basi
 - Enemies are now spawned on the bottom as well, with the ability to shoot upwards
 - Began development on a new enemy spawner program that randomly spawns the ships above and below after some amount of time [in progress]
 
-# 09.30.20 - Schmup's Ahoy Day 2
+# 09.30.20 - Schmup's Ahoy Dev Day 2
 
 - Have the kraken appear as  random variant, with different difficulties
 - Color changes
@@ -78,3 +78,26 @@ Next steps
 - Update the sprites / visual components
 - Add rum (power up / down)
 - Add a Game Over screen
+
+# 10.02.20 - Schmup's Ahoy Dev Day 3
+
+- Ammo Supply Box prefab created
+    - adds 10 ammo to supply
+    - slowly floats left from the right of screen
+    - gets destroyed upon contact
+- Decreased size of cannonballs from 1 1 to .5 .5 
+- Added pirate ship and enemy ship sprites
+    - Hitboxes are smaller for enemies and players
+- Added a Game Over Screen
+- Moved health control to the game manager script
+- Healthbar is now red
+- Experimented with enemies shooting more projectiles at a time(Might be used to increase difficulty over time)
+- Player speed reduced from .5f to .2f;
+
+Next Steps
+- Game Over restart button
+- Rum Power Up
+- Generate ammo boxes over time
+- Adjust difficulty
+    - Make enemies stronger over time? 
+- Generate power ups over time
