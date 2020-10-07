@@ -12,10 +12,17 @@ public class ProjectileScript : MonoBehaviour
 
     private Rigidbody2D        rb;
     private float projectileXDir;
-    
+
+    private GameObject thePlayer;
+    private PlayerScript playerScript;
+
     // Start is called before the first frame update
     void Start()
     {
+        //check for rum active
+        thePlayer = GameObject.Find("Player");
+        playerScript = thePlayer.GetComponent<PlayerScript>();
+
         rb = GetComponent<Rigidbody2D>();
         StartCoroutine("Launch");
     }
@@ -51,6 +58,11 @@ public class ProjectileScript : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+
+        if (other.gameObject.tag == "leftwall")
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     void OnCollisionEnter2D(Collision2D other)
@@ -58,7 +70,14 @@ public class ProjectileScript : MonoBehaviour
         if(other.gameObject.tag == "Enemy")
         {
             //award points
-            ManagerScript.S.UpdateScore();
+            if (playerScript.rumActive)
+            {
+                ManagerScript.S.UpdateScore(200);
+            }
+            else
+            {
+                ManagerScript.S.UpdateScore(100);
+            }
 
             Instantiate(explosion, other.transform.position, Quaternion.identity);
             Destroy(other.gameObject);
@@ -66,6 +85,11 @@ public class ProjectileScript : MonoBehaviour
         }
 
         if(other.gameObject.tag == "wall")
+        {
+            Destroy(this.gameObject);
+        }
+
+        if (other.gameObject.tag == "leftwall")
         {
             Destroy(this.gameObject);
         }

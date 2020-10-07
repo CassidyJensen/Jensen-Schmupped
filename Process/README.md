@@ -121,3 +121,51 @@ Next steps
 -Add more power ups
     - Intrigued by the idea of power ups being a choice with good and bad consequences. 
 - Game Over Restart button still needed
+
+# 10.07.20 - Schmup's Ahoy Midpoint Evaluation
+
+Playtesting Review
+- Recommended having ammo spawn on a random timer (the consistent was too controlled and easy)
+- First instinct upon playing the game is shooting a bunch of times, quickly ran out of ammo
+    - Had to focus on dodging the enemies while waiting for pickup
+    - first pickup should be slow enough to give the user time to learn dodging
+    - but fast enough that it doesn't make it impossible
+- Enemies might need to become more challenging to evade
+    - Currently pretty easy
+    - Maybe good for learning evading early, but quickly ramping up? 
+- Need labels on score and ammo to make it more clear what is going on
+    - might need a status label for pickups
+- Additional Cannonballs should be at slightly less of a sharp angle
+    - aim it more downwards/upwards
+- Voiced interest in more pickups
+    - Specifically shooting longer? 
+    - Health pickup
+- Commented that the controls weren't intuitive at first with the two sides of shooting
+    - but noted that it was fun gameplay once they got used to it
+
+Patchnotes
+- Ammo spawn is now on a random timer
+- Label for score and ammo added
+- Double points while rum active
+- Rum spawns randomly over time
+- Rum and ammo box disappear when they hit the walls!
+- Added a status UI element
+    - Updates when user has rum power up
+    - will update when other power ups are included
+- Upped random enemy spawner
+    - spawn min 0 -> 2
+- Adjusted random range for rum influence (made it smaller)
+    - (-.05f, .05f) ->
+- Animation disappears once finished
+- After 10 rounds enemies get stronger
+    - Round 10 - spawnMin and spawnMax increase by +2
+    - Round 20 - shoot two bullets 
+    - shoot faster?? more likely to shoot?? 
+
+Next steps
+- Other power ups --- Health???
+- Angle secondary cannons more downward/upwards
+- Add ocean texture
+- Create pickup sprites
+- Game Over Restart button still needed
+- Experiment more with increasing enemy difficulty

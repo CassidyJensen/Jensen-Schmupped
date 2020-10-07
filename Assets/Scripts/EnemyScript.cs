@@ -7,12 +7,18 @@ public class EnemyScript : MonoBehaviour
 
     public GameObject projectile;
 
+    private GameObject enemyManager;
+    private EnemyManagerScript enemyManagerScript;
+
     // Start is called before the first frame update
     void Start()
     {
         float delay = Random.Range(2f, 10f);
         float rate = Random.Range(2f, 8f);
         InvokeRepeating("Fire", delay, rate);
+
+        enemyManager = GameObject.Find("EnemyManager");
+        enemyManagerScript = enemyManager.GetComponent<EnemyManagerScript>();
     }
 
     // Update is called once per frame
@@ -23,6 +29,11 @@ public class EnemyScript : MonoBehaviour
         {
             Instantiate(projectile, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
 
+            if (enemyManagerScript.roundLength > 20)
+            {
+                var proj = (GameObject)Instantiate(projectile, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
+                proj.GetComponent<ProjectileScript>().ReceiveParameter(-1);
+            }
             //add a bunch of projectiles (make it harder??? round 2??
             //var proj = (GameObject)Instantiate(projectile, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
             //proj.GetComponent<ProjectileScript>().ReceiveParameter(-1);

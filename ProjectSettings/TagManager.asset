@@ -12,6 +12,7 @@ TagManager:
   - EnemyProjectile
   - AmmoSupply
   - Rum
+  - leftwall
   layers:
   - Default
   - TransparentFX

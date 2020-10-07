@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 6832313781230577184, guid: 78919e2d4d0385e4f8f88867b28aa0f8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6832313781230577184, guid: 78919e2d4d0385e4f8f88867b28aa0f8,
         type: 3}
@@ -80,7 +80,7 @@ PrefabInstance:
     - target: {fileID: 6832313781230577189, guid: 78919e2d4d0385e4f8f88867b28aa0f8,
         type: 3}
       propertyPath: m_Name
-      value: Rum
+      value: Rum Variant
       objectReference: {fileID: 0}
     - target: {fileID: 6832313781230577189, guid: 78919e2d4d0385e4f8f88867b28aa0f8,
         type: 3}

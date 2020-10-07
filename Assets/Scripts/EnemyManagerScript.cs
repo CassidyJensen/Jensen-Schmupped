@@ -14,7 +14,7 @@ public class EnemyManagerScript : MonoBehaviour {
     public float amplitude = .5f;
 
     public float roundLength;
-    public int spawnMax;
+    public int spawnMax, spawnMin;
 
     private float randX;
     private Vector2 loc2, loc;
@@ -65,8 +65,14 @@ public class EnemyManagerScript : MonoBehaviour {
         //randomly split between top or bottom enemies
         //choose a location on the screen where enemies are not present. Animate up / down
         //random row??
-        for (int y = 0; y < roundLength; y++) {
-            int r = Random.Range(0, spawnMax + 1);
+        //for (int y = 0; y < roundLength; y++) {
+        while (roundLength > 0) { 
+            if(roundLength == 10)
+            {
+                spawnMin = 4;
+                spawnMax = 7;
+            }
+            int r = Random.Range(spawnMin, spawnMax + 1);
            // Debug.Log("Section");
            // Debug.Log(r);
 
@@ -115,6 +121,7 @@ public class EnemyManagerScript : MonoBehaviour {
                 }
             }
             yield return wait;
+            roundLength++;
             
         }
     }

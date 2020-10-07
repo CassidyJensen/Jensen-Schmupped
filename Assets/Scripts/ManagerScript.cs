@@ -6,13 +6,13 @@ using UnityEngine.UI;
 
 public class ManagerScript : MonoBehaviour
 {
-    public Text score, ammo;
-    public int scoreVal, ammoVal, ammoTimer;
+    public Text score, ammo, status;
+    public int scoreVal, ammoVal, ammoTimer, rumTimer;
 
     public float health = 1f;
     public Image healthBar;
 
-    public GameObject ammoBox;
+    public GameObject ammoBox, rumBox;
 
     public static ManagerScript S;
 
@@ -26,11 +26,14 @@ public class ManagerScript : MonoBehaviour
     {
         ammo.text = ammoVal.ToString();
         score.text = scoreVal.ToString();
+        UpdateStatus("");
 
         healthBar.fillAmount = health;
 
 
         StartCoroutine(AmmoSpawner());
+        StartCoroutine(RumSpawner());
+
     }
 
     // Update is called once per frame
@@ -39,10 +42,10 @@ public class ManagerScript : MonoBehaviour
         
     }
 
-    public void UpdateScore()
+    public void UpdateScore(int scoreInc)
     {
-        scoreVal += 100;
-         score.text = scoreVal.ToString();
+        scoreVal += scoreInc;
+        score.text = scoreVal.ToString();
     }
     public void UpdateAmmo(int ammoNum)
     {
@@ -63,14 +66,32 @@ public class ManagerScript : MonoBehaviour
 
     private IEnumerator AmmoSpawner()
     {
-        WaitForSeconds wait = new WaitForSeconds(ammoTimer);
-
         while (ammoTimer > 0)
         {
+            ammoTimer = Random.Range(20, 50);
+            WaitForSeconds wait = new WaitForSeconds(ammoTimer);
+
             Instantiate(ammoBox);
             yield return wait;
         }
 
-        yield return wait;
+    }
+
+    private IEnumerator RumSpawner()
+    {
+        while (rumTimer > 0)
+        {
+            rumTimer = Random.Range(20, 50);
+            WaitForSeconds wait = new WaitForSeconds(rumTimer);
+
+            Instantiate(rumBox);
+            yield return wait;
+        }
+
+    }
+
+    public void UpdateStatus(string updateText)
+    {
+        status.text = updateText;
     }
 }

@@ -16,6 +16,8 @@ public class PlayerScript : MonoBehaviour {
     public GameObject projectileDown;
     public KeyCode fireUpKey, fireDownKey;
 
+    public bool rumActive = false;
+
     // Start is called before the first frame update
     void Start() {
 
@@ -101,19 +103,22 @@ public class PlayerScript : MonoBehaviour {
     private IEnumerator RumEffects()
     {
         int rumTimer = 20;
+        rumActive = true;
         WaitForSeconds wait = new WaitForSeconds(1);
-
+        ManagerScript.S.UpdateStatus("Rum");
         //rum positive effect
 
-        for(int i=0; i < rumTimer; i++)
+        for (int i=0; i < rumTimer; i++)
         {
             //set rum variable negative effect
-            rumVar = Random.Range(-.05f, .05f);
+            rumVar = Random.Range(-.04f, .04f);
             yield return wait;
 
         }
 
         rumVar = 0;
+        rumActive = false;
+        ManagerScript.S.UpdateStatus("");
     }
 
 }

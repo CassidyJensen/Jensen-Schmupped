@@ -21,4 +21,12 @@ public class AmmoScript : MonoBehaviour
 
         transform.position = new Vector2(transform.position.x - speed, offset);
     }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "leftwall")
+        {
+            Destroy(this.gameObject);
+        }
+    }
 }

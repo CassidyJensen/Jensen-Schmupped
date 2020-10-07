@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class ExplosionScript : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private IEnumerator KillOnAnimationEnd()
     {
-        
+        yield return new WaitForSeconds(1f);
+        Destroy(gameObject);
+    }
+
+    void Update()
+    {
+        StartCoroutine(KillOnAnimationEnd());
     }
 
     public void Kill()
@@ -15,9 +20,4 @@ public class ExplosionScript : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
