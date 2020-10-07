@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class ManagerScript : MonoBehaviour
 {
     public Text score, ammo;
-    public int scoreVal, ammoVal;
+    public int scoreVal, ammoVal, ammoTimer;
 
     public float health = 1f;
     public Image healthBar;
@@ -30,8 +30,7 @@ public class ManagerScript : MonoBehaviour
         healthBar.fillAmount = health;
 
 
-        Instantiate(ammoBox);
-
+        StartCoroutine(AmmoSpawner());
     }
 
     // Update is called once per frame
@@ -60,5 +59,18 @@ public class ManagerScript : MonoBehaviour
             SceneManager.LoadScene("GameOver");
         }
         healthBar.fillAmount = health;
+    }
+
+    private IEnumerator AmmoSpawner()
+    {
+        WaitForSeconds wait = new WaitForSeconds(ammoTimer);
+
+        while (ammoTimer > 0)
+        {
+            Instantiate(ammoBox);
+            yield return wait;
+        }
+
+        yield return wait;
     }
 }

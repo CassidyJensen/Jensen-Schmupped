@@ -10,6 +10,7 @@ public class PlayerScript : MonoBehaviour {
     public float angle1, angle2, angle3;
     public float speedFreq = 2f;
     public float amplitude = .5f;
+    private float rumVar = 0f;
 
     public GameObject projectile;
     public GameObject projectileDown;
@@ -24,13 +25,13 @@ public class PlayerScript : MonoBehaviour {
     void Update() {
         if (Input.GetKey(KeyCode.LeftArrow)) {
             if (xPos > leftWall) {
-                xPos -= speed;
+                xPos -= speed + rumVar;
             }
         }
 
         if (Input.GetKey(KeyCode.RightArrow)) {
             if (xPos < rightWall) {
-                xPos += speed;
+                xPos += speed + rumVar;
             }
         }
 
@@ -68,7 +69,7 @@ public class PlayerScript : MonoBehaviour {
         //move side to side - Sine waves
         float offset = Mathf.Sin(Time.time * speedFreq) * amplitude / 2;
 
-        transform.localPosition = new Vector3(xPos, offset, 0);
+        transform.localPosition = new Vector2(xPos, offset);
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -85,6 +86,34 @@ public class PlayerScript : MonoBehaviour {
             ManagerScript.S.UpdateAmmo(10);
 
         }
+
+        if (other.gameObject.tag == "Rum")
+        {
+            Destroy(other.gameObject);
+            //Start CoRoutine?? 
+            //For 10 seconds
+            //adjust the player speed with rum variable? 
+            //also adjust the offset? 
+            StartCoroutine(RumEffects());
+        }
+    }
+
+    private IEnumerator RumEffects()
+    {
+        int rumTimer = 20;
+        WaitForSeconds wait = new WaitForSeconds(1);
+
+        //rum positive effect
+
+        for(int i=0; i < rumTimer; i++)
+        {
+            //set rum variable negative effect
+            rumVar = Random.Range(-.05f, .05f);
+            yield return wait;
+
+        }
+
+        rumVar = 0;
     }
 
 }

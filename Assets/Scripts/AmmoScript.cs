@@ -5,6 +5,8 @@ using UnityEngine;
 public class AmmoScript : MonoBehaviour
 {
     public float speed;
+    public float speedFreq = 1f;
+    public float amplitude = 3f;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,6 +16,9 @@ public class AmmoScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = new Vector2(transform.position.x - speed, transform.position.y);
+        //move side to side - Sine waves
+        float offset = Mathf.Sin(Time.time * speedFreq) * amplitude / 2;
+
+        transform.position = new Vector2(transform.position.x - speed, offset);
     }
 }

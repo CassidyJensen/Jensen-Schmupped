@@ -101,3 +101,23 @@ Next Steps
 - Adjust difficulty
     - Make enemies stronger over time? 
 - Generate power ups over time
+
+# 10.05.20 - Schmup's Ahoy Dev Day 4
+
+- Made a variation on the Ammo supply prefab as a rum power up
+    - Implemented the negative effects of rum
+    - becomes difficult to move left and right
+    - spawns at beginning
+- Ammo boxes spawn consistently over time
+- Changed the amplitude for ammo boxes to make them missable. This applies to power ups as well
+- Experimented with ways to prevent enemies from spawning on top of each other
+    - No working solution has been found yet. 
+    - Overlap box is having issues. 
+
+Next steps
+-Create a second phase where enemies get stronger
+-Generate power ups over time
+-Finish the rum power up with positive effects as well as negative. 
+-Add more power ups
+    - Intrigued by the idea of power ups being a choice with good and bad consequences. 
+- Game Over Restart button still needed

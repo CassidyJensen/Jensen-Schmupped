@@ -19,7 +19,7 @@ public class EnemyManagerScript : MonoBehaviour {
     private float randX;
     private Vector2 loc2, loc;
 
-    private Vector2 enemySize = new Vector2(.5f, .3f);
+    private Vector3 enemySize = new Vector3(20, 20);
 
     // Start is called before the first frame update
     void Start()
@@ -104,7 +104,7 @@ public class EnemyManagerScript : MonoBehaviour {
                     while(check == true)
                     {
                         randX = Random.Range(-5f, 5f);
-                        loc2 = new Vector2(randX, row);
+                        loc2 = new Vector3(randX, row, 0);
                         check = isObjectHere(loc2);
                     }
 
@@ -119,17 +119,43 @@ public class EnemyManagerScript : MonoBehaviour {
         }
     }
 
-    bool isObjectHere(Vector2 position)
+    bool isObjectHere(Vector3 test)
     {
-        Collider[] intersecting = Physics.OverlapBox(position, enemySize);
+        //Collider[] intersecting = Physics.OverlapBox(test, enemySize, Quaternion.identity);
+        Vector3 testV = new Vector3(1, 2, 0);
+        Vector3 testV2 = new Vector3(1, 2, 0);
+        Collider[] intersecting = Physics.OverlapBox(testV, testV2, Quaternion.identity);
+        Debug.Log("intersecting" + intersecting);
+
+
         if (intersecting.Length != 0)
         {
+            Debug.Log("Test: " + test);
+
             return true;
         }
         else
         {
-            return false;
+
+        return false;
         }
     }
+
+    //bool isSomethingHere()
+    // {
+    //Use the OverlapBox to detect if there are any other colliders within this box area.
+    //Use the GameObject's centre, half the size (as a radius) and rotation. This creates an invisible box around your GameObject.
+    // Collider[] hitColliders = Physics2D.OverlapBox(gameObject.transform.position, transform.localScale, Quaternion.identity);
+    // int i = 0;
+    //Check when there is a new collider coming into contact with the box
+    // while (i < hitColliders.Length)
+    //  {
+    //Output all of the collider names
+    //  Debug.Log("Hit : " + hitColliders[i].name + i);
+    //Increase the number of Colliders in the array
+    // i++;
+    //  }
+    //  }
+
 
 }
