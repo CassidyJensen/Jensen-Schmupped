@@ -169,3 +169,52 @@ Next steps
 - Create pickup sprites
 - Game Over Restart button still needed
 - Experiment more with increasing enemy difficulty
+
+
+# 10.10.20 - Dev Day 6
+- Secondary cannonballs are angled slightly less sharply
+- After 10 rounds enemies get stronger
+    - Round 10 - spawnMin and spawnMax increase by +2
+    - Round 20 - increase likelihood of shooting (80 -> 60)
+    - Round 30 - show two cannonballs
+    - Round 40 - spawnMin and spawnMax increase by +2
+    - Round 50 - increase likelihood of shooting (60 -> 40)
+    - Round 60 - shoot three cannonballs
+    - shoot faster?? more likely to shoot?? 
+- Enemies spawn further from ship
+    - Random.Range (0, 5) -> (1, 5)
+    - Random.Range (-4, 0) -> (-4, -1)
+- Game Over Restart button
+
+Next Steps
+- Make ammo more clear when it runs out?? 
+- Indicate double points with rum
+- Other power ups --- Health???
+- Create pickup sprites
+
+# 10.12.20 - Dev Day 7
+- Updated status indicators
+- Added Health power up
+    - Regen health but can only shoot one cannonball from each side
+    - .01f health per second for 20 seconds
+    - 30% chance to spawn
+- Added Bullet Hell power up
+    - Unlimited ammo
+    - Enemies shoot like crazy as well
+    - Didn't like the play out of this version
+    - Tried to spawn more enemies with it, still didn't like it
+    - Didn't fit with game, removed
+- Experimented overall 
+
+Next Steps
+- Add sprites/textures
+
+# 10.13.20 - Dev Day 8
+Final playtesting by roommate
+    - Satisfied with overall results
+    - Quickly figured out the controls
+    - Clipped out too fast while in rum state
+    - Didn't always notice what effects the boxes had - hopefully fixed by sprites and more specific status indicators
+    - Was quickly invested in staying alive
+- Added sprites for powerups
+- Added a background, but it was too busy (removed and remains gone)

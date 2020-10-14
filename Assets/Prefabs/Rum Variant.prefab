@@ -65,18 +65,24 @@ PrefabInstance:
     - target: {fileID: 6832313781230577187, guid: 78919e2d4d0385e4f8f88867b28aa0f8,
         type: 3}
       propertyPath: m_Color.r
-      value: 0.45497882
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6832313781230577187, guid: 78919e2d4d0385e4f8f88867b28aa0f8,
         type: 3}
       propertyPath: m_Color.g
-      value: 0.11256672
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6832313781230577187, guid: 78919e2d4d0385e4f8f88867b28aa0f8,
         type: 3}
       propertyPath: m_Color.b
-      value: 0.5849056
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6832313781230577187, guid: 78919e2d4d0385e4f8f88867b28aa0f8,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a46d3d821f34bd4dac75ccdfbb3fb6c,
+        type: 3}
     - target: {fileID: 6832313781230577189, guid: 78919e2d4d0385e4f8f88867b28aa0f8,
         type: 3}
       propertyPath: m_Name
@@ -86,6 +92,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: Rum
+      objectReference: {fileID: 0}
+    - target: {fileID: 6832313781230577198, guid: 78919e2d4d0385e4f8f88867b28aa0f8,
+        type: 3}
+      propertyPath: speedFreq
+      value: 1.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78919e2d4d0385e4f8f88867b28aa0f8, type: 3}

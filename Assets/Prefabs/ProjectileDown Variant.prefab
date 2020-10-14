@@ -67,10 +67,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5477356295877273098, guid: 6eefd5445731807448817a47b0000d3e,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.5647059
+      objectReference: {fileID: 0}
+    - target: {fileID: 5477356295877273098, guid: 6eefd5445731807448817a47b0000d3e,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.5647059
+      objectReference: {fileID: 0}
+    - target: {fileID: 5477356295877273098, guid: 6eefd5445731807448817a47b0000d3e,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.5647059
+      objectReference: {fileID: 0}
     - target: {fileID: 5477356295877273099, guid: 6eefd5445731807448817a47b0000d3e,
         type: 3}
       propertyPath: m_Name
-      value: ProjectileDown
+      value: ProjectileDown Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6eefd5445731807448817a47b0000d3e, type: 3}

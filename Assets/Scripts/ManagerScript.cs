@@ -6,13 +6,13 @@ using UnityEngine.UI;
 
 public class ManagerScript : MonoBehaviour
 {
-    public Text score, ammo, status;
-    public int scoreVal, ammoVal, ammoTimer, rumTimer;
+    public Text score, ammo, status, round, timer;
+    public int scoreVal, ammoVal, ammoTimer, rumTimer, roundVal, powerType;
 
     public float health = 1f;
     public Image healthBar;
 
-    public GameObject ammoBox, rumBox;
+    public GameObject ammoBox, rumBox, healthBox;
 
     public static ManagerScript S;
 
@@ -26,13 +26,14 @@ public class ManagerScript : MonoBehaviour
     {
         ammo.text = ammoVal.ToString();
         score.text = scoreVal.ToString();
+        round.text = roundVal.ToString();
         UpdateStatus("");
 
         healthBar.fillAmount = health;
 
 
         StartCoroutine(AmmoSpawner());
-        StartCoroutine(RumSpawner());
+        StartCoroutine(PowerUpSpawner());
 
     }
 
@@ -49,19 +50,31 @@ public class ManagerScript : MonoBehaviour
     }
     public void UpdateAmmo(int ammoNum)
     {
+
         ammoVal = ammoVal + ammoNum;
         ammo.text = ammoVal.ToString();
     }
 
-    public void UpdateHealth()
+    public void UpdateHealth(float healthChange)
     {
-        health -= .1f;
+        
+        health += healthChange;
+        if (health > 1)
+        {
+            health = 1;
+        }
         if (health <= 0)
         {
             //game over
             SceneManager.LoadScene("GameOver");
         }
         healthBar.fillAmount = health;
+    }
+
+    public void UpdateRound()
+    {
+        roundVal++;
+        round.text = roundVal.ToString();
     }
 
     private IEnumerator AmmoSpawner()
@@ -77,14 +90,23 @@ public class ManagerScript : MonoBehaviour
 
     }
 
-    private IEnumerator RumSpawner()
+    private IEnumerator PowerUpSpawner()
     {
         while (rumTimer > 0)
         {
             rumTimer = Random.Range(20, 50);
+            powerType = Random.Range(0, 100);
+
             WaitForSeconds wait = new WaitForSeconds(rumTimer);
 
-            Instantiate(rumBox);
+            if(powerType > 30)
+            {
+                Instantiate(rumBox);
+            }
+            else 
+            {
+                Instantiate(healthBox);
+            }
             yield return wait;
         }
 

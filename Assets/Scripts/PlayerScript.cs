@@ -17,11 +17,13 @@ public class PlayerScript : MonoBehaviour {
     public KeyCode fireUpKey, fireDownKey;
 
     public bool rumActive = false;
+    private bool healthActive = false;
+
+
 
     // Start is called before the first frame update
     void Start() {
-
-    }
+}
 
     // Update is called once per frame
     void Update() {
@@ -42,34 +44,47 @@ public class PlayerScript : MonoBehaviour {
             if (Input.GetKeyDown(fireUpKey))
             {
                 //Instantiate(projectile, new Vector2(transform.position.x, transform.position.y + 0.5f), Quaternion.identity);
+
                 ManagerScript.S.UpdateAmmo(-1);
 
-                var proj = (GameObject)Instantiate(projectile, new Vector2(transform.position.x - .25f, transform.position.y + 0.5f), Quaternion.identity);
-                proj.GetComponent<ProjectileScript>().ReceiveParameter(angle1);
+                if (!healthActive)
+                {
+                    var proj = (GameObject)Instantiate(projectile, new Vector2(transform.position.x - .25f, transform.position.y + 0.5f), Quaternion.identity);
+                    proj.GetComponent<ProjectileScript>().ReceiveParameter(angle1);
+                    var proj2 = (GameObject)Instantiate(projectile, new Vector2(transform.position.x + .25f, transform.position.y + 0.5f), Quaternion.identity);
+                    proj2.GetComponent<ProjectileScript>().ReceiveParameter(angle3);
+                }
+             
                 var proj1 = (GameObject)Instantiate(projectile, new Vector2(transform.position.x, transform.position.y + 0.5f), Quaternion.identity);
                 proj1.GetComponent<ProjectileScript>().ReceiveParameter(angle2);
-                var proj2 = (GameObject)Instantiate(projectile, new Vector2(transform.position.x + .25f, transform.position.y + 0.5f), Quaternion.identity);
-                proj2.GetComponent<ProjectileScript>().ReceiveParameter(angle3);
+               
             }
 
             if (Input.GetKeyDown(fireDownKey))
             {
                 //Instantiate(projectileDown, new Vector2(transform.position.x, transform.position.y - 0.5f), Quaternion.identity);
+               
                 ManagerScript.S.UpdateAmmo(-1);
 
-                var proj = (GameObject)Instantiate(projectileDown, new Vector2(transform.position.x - .25f, transform.position.y - 0.5f), Quaternion.identity);
-                proj.GetComponent<ProjectileScript>().ReceiveParameter(angle1);
+
+                if (!healthActive)
+                {
+                    var proj = (GameObject)Instantiate(projectileDown, new Vector2(transform.position.x - .25f, transform.position.y - 0.5f), Quaternion.identity);
+                    proj.GetComponent<ProjectileScript>().ReceiveParameter(angle1);
+
+                    var proj2 = (GameObject)Instantiate(projectileDown, new Vector2(transform.position.x + .25f, transform.position.y - 0.5f), Quaternion.identity);
+                    proj2.GetComponent<ProjectileScript>().ReceiveParameter(angle3);
+                }
+
                 var proj1 = (GameObject)Instantiate(projectileDown, new Vector2(transform.position.x, transform.position.y - 0.5f), Quaternion.identity);
                 proj1.GetComponent<ProjectileScript>().ReceiveParameter(angle2);
-                var proj2 = (GameObject)Instantiate(projectileDown, new Vector2(transform.position.x + .25f, transform.position.y - 0.5f), Quaternion.identity);
-                proj2.GetComponent<ProjectileScript>().ReceiveParameter(angle3);
 
 
             }
         }
 
         //move side to side - Sine waves
-        float offset = Mathf.Sin(Time.time * speedFreq) * amplitude / 2;
+        float offset = Mathf.Sin(Time.time * speedFreq ) * amplitude / 2;
 
         transform.localPosition = new Vector2(xPos, offset);
     }
@@ -79,7 +94,7 @@ public class PlayerScript : MonoBehaviour {
         if (other.gameObject.tag == "EnemyProjectile")
         {
             Destroy(other.gameObject);
-            ManagerScript.S.UpdateHealth();
+            ManagerScript.S.UpdateHealth(-.1f);
         }
 
         if (other.gameObject.tag == "AmmoSupply")
@@ -98,6 +113,13 @@ public class PlayerScript : MonoBehaviour {
             //also adjust the offset? 
             StartCoroutine(RumEffects());
         }
+
+        if (other.gameObject.tag == "healthBox")
+        {
+            Destroy(other.gameObject);
+            StartCoroutine(HealthEffects());
+        }
+
     }
 
     private IEnumerator RumEffects()
@@ -105,7 +127,7 @@ public class PlayerScript : MonoBehaviour {
         int rumTimer = 20;
         rumActive = true;
         WaitForSeconds wait = new WaitForSeconds(1);
-        ManagerScript.S.UpdateStatus("Rum");
+        ManagerScript.S.UpdateStatus("Rum - Double Points");
         //rum positive effect
 
         for (int i=0; i < rumTimer; i++)
@@ -121,5 +143,23 @@ public class PlayerScript : MonoBehaviour {
         ManagerScript.S.UpdateStatus("");
     }
 
+    private IEnumerator HealthEffects()
+    {
+        int healthTimer = 20;
+        healthActive = true;
+        WaitForSeconds wait = new WaitForSeconds(1);
+        ManagerScript.S.UpdateStatus("Citrus - Health Regen");
+
+        for (int i = 0; i < healthTimer; i++)
+        {
+            ManagerScript.S.UpdateHealth(.01f);
+            yield return wait;
+        }
+
+        healthActive = false;
+        ManagerScript.S.UpdateStatus("");
+    }
+
+   
 }
 

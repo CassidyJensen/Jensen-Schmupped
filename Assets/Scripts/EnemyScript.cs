@@ -7,32 +7,48 @@ public class EnemyScript : MonoBehaviour
 
     public GameObject projectile;
 
-    private GameObject enemyManager;
-    private EnemyManagerScript enemyManagerScript;
+    private float delay, rate;
+    public int chance;
+    private int chanceVal;
 
     // Start is called before the first frame update
     void Start()
     {
-        float delay = Random.Range(2f, 10f);
-        float rate = Random.Range(2f, 8f);
+        delay = Random.Range(2f, 10f);
+        rate = Random.Range(2f, 8f);
+
+        chance = 80;
+        //chance increase
+        if (ManagerScript.S.roundVal > 50)
+        {
+            chance = 40;
+        }
+        else if (ManagerScript.S.roundVal > 20)
+        {
+            chance = 60;
+        }
         InvokeRepeating("Fire", delay, rate);
 
-        enemyManager = GameObject.Find("EnemyManager");
-        enemyManagerScript = enemyManager.GetComponent<EnemyManagerScript>();
     }
 
-    // Update is called once per frame
+
     private void Fire()
     {
         int i = Random.Range(0, 100);
-        if(i > 80)
+
+        if(i > chance)
         {
             Instantiate(projectile, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
 
-            if (enemyManagerScript.roundLength > 20)
+            if (ManagerScript.S.roundVal > 30)
             {
                 var proj = (GameObject)Instantiate(projectile, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
                 proj.GetComponent<ProjectileScript>().ReceiveParameter(-1);
+            }
+            if (ManagerScript.S.roundVal > 60)
+            {
+                var proj2 = (GameObject)Instantiate(projectile, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
+                proj2.GetComponent<ProjectileScript>().ReceiveParameter(1);
             }
             //add a bunch of projectiles (make it harder??? round 2??
             //var proj = (GameObject)Instantiate(projectile, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);

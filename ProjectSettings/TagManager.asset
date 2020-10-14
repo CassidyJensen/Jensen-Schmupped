@@ -13,6 +13,8 @@ TagManager:
   - AmmoSupply
   - Rum
   - leftwall
+  - healthBox
+  - BulletHell
   layers:
   - Default
   - TransparentFX

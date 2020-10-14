@@ -13,7 +13,7 @@ public class EnemyManagerScript : MonoBehaviour {
     public float speedFreq = 2f;
     public float amplitude = .5f;
 
-    public float roundLength;
+    //public float roundLength;
     public int spawnMax, spawnMin;
 
     private float randX;
@@ -24,28 +24,7 @@ public class EnemyManagerScript : MonoBehaviour {
     // Start is called before the first frame update
     void Start()
     {
-       // for (int i = 0; i < numRows; i++) {
-         //   for (int j = 0; j < numColumns; j++) {
-           //     Transform go = Instantiate(enemyAbove);
-             //   go.transform.parent = this.transform;
-                
-              //  Vector2 loc = new Vector2(xOrigin + (i * xSpacing), yOrigin - (j * ySpacing));
-
-                //go.transform.position = loc;
-
-                //generate enemies on bottom at same space for testing
-//                Transform below = Instantiate(enemyBelow);
-  //              below.transform.parent = this.transform;
-    //            Vector2 loc2 = new Vector2(xOrigin + (i * xSpacing), -yOrigin + (j * ySpacing));
-      //          below.transform.position = loc2;
-
-        //        SpriteRenderer sr = go.GetComponent<SpriteRenderer>();
-          //      SpriteRenderer sr2 = below.GetComponent<SpriteRenderer>();
-       //     }
-       // }
-
         StartCoroutine(EnemySpawner());
-
     }
 
     void Update()
@@ -66,8 +45,13 @@ public class EnemyManagerScript : MonoBehaviour {
         //choose a location on the screen where enemies are not present. Animate up / down
         //random row??
         //for (int y = 0; y < roundLength; y++) {
-        while (roundLength > 0) { 
-            if(roundLength == 10)
+        while (ManagerScript.S.roundVal > 0) { 
+            if(ManagerScript.S.roundVal == 10)
+            {
+                spawnMin = 4;
+                spawnMax = 7;
+            }
+            if (ManagerScript.S.roundVal == 40)
             {
                 spawnMin = 4;
                 spawnMax = 7;
@@ -83,7 +67,7 @@ public class EnemyManagerScript : MonoBehaviour {
                 if (aOrB == 0)
                 {
                     //generate enemy above
-                    int row = Random.Range(1, 5);
+                    int row = Random.Range(2, 5);
                     Transform go = Instantiate(enemyAbove);
                     go.transform.parent = this.transform;
 
@@ -102,7 +86,7 @@ public class EnemyManagerScript : MonoBehaviour {
                 else
                 {
                     //generate enemy below
-                    int row = Random.Range(-4, 0);
+                    int row = Random.Range(-4, -1);
                     Transform below = Instantiate(enemyBelow);
                     below.transform.parent = this.transform;
 
@@ -121,19 +105,15 @@ public class EnemyManagerScript : MonoBehaviour {
                 }
             }
             yield return wait;
-            roundLength++;
-            
+            //roundLength++;
+            ManagerScript.S.UpdateRound();
+
         }
     }
 
     bool isObjectHere(Vector3 test)
     {
-        //Collider[] intersecting = Physics.OverlapBox(test, enemySize, Quaternion.identity);
-        Vector3 testV = new Vector3(1, 2, 0);
-        Vector3 testV2 = new Vector3(1, 2, 0);
-        Collider[] intersecting = Physics.OverlapBox(testV, testV2, Quaternion.identity);
-        Debug.Log("intersecting" + intersecting);
-
+        Collider[] intersecting = Physics.OverlapBox(test, enemySize, Quaternion.identity);
 
         if (intersecting.Length != 0)
         {
